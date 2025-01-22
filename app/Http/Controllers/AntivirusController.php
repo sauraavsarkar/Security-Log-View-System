@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\LogEntry;
 
-class DashboardController extends Controller
+class AntivirusController extends Controller
 {
     public function index()
     {
@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $topAntivirusAlerts = $this->getTopAntivirusAlerts();
         $topTrafficIps = $this->getTopTrafficIps();
 
-        return view('dashboard', compact(
+        return view('dashboard.antivirus', compact(
             'topFailedLogins', 'logTypeCount', 'afterOfficeUsers', 
             'topAntivirusAlerts', 'topTrafficIps'
         ));
