@@ -28,6 +28,28 @@ class AntivirusController extends Controller
 
     }
 
+
+    public function FailedLogins()
+    {
+        $topFailedLogins = $this->getTopFailedLogins();
+        $logTypeCount = $this->getLogTypeCount();
+        $afterOfficeUsers = $this->getUsersLoggedInAfterOffice();
+        $topAntivirusAlerts = $this->getTopAntivirusAlerts();
+        $topTrafficIps = $this->getTopTrafficIps();
+
+        return view('dashboard.antivirus.failedlogins', compact(
+            'topFailedLogins', 'logTypeCount', 'afterOfficeUsers', 
+            'topAntivirusAlerts', 'topTrafficIps'
+        ));
+
+        // dd(compact(
+        //     'topFailedLogins', 'logTypeCount', 'afterOfficeUsers', 
+        //     'topAntivirusAlerts', 'topTrafficIps'
+        // ));
+
+
+    }
+
     public function getTopFailedLogins()
     {
         return LogEntry::select('username', 'event_type', DB::raw('COUNT(*) as count'))

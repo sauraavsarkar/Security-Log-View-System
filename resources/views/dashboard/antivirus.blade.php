@@ -6,7 +6,6 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                  <!DOCTYPE html>
@@ -57,13 +56,16 @@
         <div class="row">
             <!-- Bar Chart: Top 5 Failed Logins -->
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Top 5 Failed Logins</div>
-                    <div class="card-body">
-                        <canvas id="failedLoginChart"></canvas>
+                <a href="{{ route('failedlogins') }}">
+                    <div class="card">
+                        <div class="card-header">Top 5 Failed Logins</div>
+                        <div class="card-body">
+                            <canvas id="failedLoginChart"></canvas>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
+
 
             <!-- Line Chart: Top Traffic IPs -->
             <div class="col-md-6">
@@ -203,5 +205,4 @@
                 </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </x-app-layout>
