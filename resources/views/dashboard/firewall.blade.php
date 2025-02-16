@@ -6,16 +6,118 @@
     </x-slot>
 
     <div class="py-12">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="{{ asset('js/bootstrap.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/chart.js') }}"></script>
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="container">
+                    <div class="row">
+                        <!-- Bar Chart: Top 5 Outbound Network Traffic -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">Top 5 Outbound Network Traffic</div>
+                                <div class="card-body">
+                                    <canvas id="outboundTrafficChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top 5 Outbound Countries -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">Top 5 Outbound Countries</div>
+                                <div class="card-body">
+                                    <canvas id="outboundCountriesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Analytics -->
+                    <div class="row mt-4">
+                        <!-- Top Firewall Actions -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">Top 5 Firewall Actions</div>
+                                <div class="card-body">
+                                    <ul>
+                                        @foreach($topFirewallActions as $action)
+                                            <li>{{ $action->action }} ({{ $action->action_count }} times)</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top User Agents -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">Top 5 User Agents</div>
+                                <div class="card-body">
+                                    <ul>
+                                        @foreach($topUserAgents as $userAgent)
+                                            <li>{{ $userAgent->user_agent }} ({{ $userAgent->user_agent_count }} times)</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Analytics -->
+                    <div class="row mt-4">
+                        <!-- Top Event Descriptions -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">Top 5 Event Descriptions</div>
+                                <div class="card-body">
+                                    <ul>
+                                        @foreach($topEventDescriptions as $event)
+                                            <li>{{ $event->event_desc }} ({{ $event->event_count }} times)</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top IP Source-Destination Pairs -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">Top 5 IP Source-Destination Pairs</div>
+                                <div class="card-body">
+                                    <ul>
+                                        @foreach($topIPPairs as $pair)
+                                            <li>{{ $pair->ip_src }} → {{ $pair->ip_dst }} ({{ $pair->pair_count }} times)</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <!-- Top Severity Levels -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">Top 5 Severity Levels</div>
+                                <div class="card-body">
+                                    <ul>
+                                        @foreach($topSeverityLevels as $severity)
+                                            <li>{{ $severity->severity }} ({{ $severity->severity_count }} times)</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer text-center mt-4">
+                    <p>&copy; 2025 Your Company | All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         body {
             background-color: #f4f7fa;
@@ -50,104 +152,26 @@
             color: #666;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <!-- Bar Chart: Top 5 Failed Logins -->
-            <div class="col-md-6">
-                <a href="{{ route('failedlogins') }}">
-                    <div class="card">
-                        <div class="card-header">Top 5 Failed Logins</div>
-                        <div class="card-body">
-                            <canvas id="failedLoginChart"></canvas>
-                        </div>
-                    </div>
-                </a>
-            </div>
+  <link href="{{ asset('js/bootstrap.min.css') }}" rel="stylesheet">
+  <script src="{{ asset('js/chart.js') }}"></script>
+  <canvas id="outboundTrafficChart"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-            <!-- Line Chart: Top Traffic IPs -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Top 5 Traffic IPs</div>
-                    <div class="card-body">
-                        <canvas id="trafficIpChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- After Office Hours Users -->
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Users Logged In After Office Hours</div>
-                    <div class="card-body">
-                        <ul>
-                            @foreach($afterOfficeUsers as $user)
-                                <li>{{ $user->username }} logged in at {{ $user->time }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Antivirus Alerts -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Top Antivirus Alerts</div>
-                    <div class="card-body">
-                        <canvas id="antivirusAlertChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <!-- Pie Chart: Log Type Distribution -->
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Log Type Distribution</div>
-                    <div class="card-body">
-                        <canvas id="logTypeChart"></canvas>
-                    </div>
-                </div>
-            </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2025 Your Company | All Rights Reserved</p>
-    </div>
 
     <script>
-        // Pie Chart: Log Type Distribution
-        const logTypeData = @json($logTypeCount);
-        const logTypeLabels = logTypeData.map(item => item.log_type);
-        const logTypeCounts = logTypeData.map(item => item.count);
 
-        new Chart(document.getElementById('logTypeChart'), {
-            type: 'pie',
-            data: {
-                labels: logTypeLabels,
-                datasets: [{
-                    data: logTypeCounts,
-                    backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff'],
-                }]
-            }
-        });
+        // Top 5 Outbound Network Traffic Chart
+        const outboundTraffic = @json($topOutboundTraffic);
+        const outboundTrafficLabels = outboundTraffic.map(item => `${item.ip_src} → ${item.ip_dst}`);
+        const outboundTrafficCounts = outboundTraffic.map(item => item.traffic_count);
 
-        // Bar Chart: Top 5 Failed Logins
-        const failedLogins = @json($topFailedLogins);
-        const failedLoginLabels = failedLogins.map(item => item.username);
-        const failedLoginCounts = failedLogins.map(item => item.count);
-
-        new Chart(document.getElementById('failedLoginChart'), {
+        new Chart(document.getElementById('outboundTrafficChart'), {
             type: 'bar',
             data: {
-                labels: failedLoginLabels,
+                labels: outboundTrafficLabels,
                 datasets: [{
-                    label: 'Failed Logins',
-                    data: failedLoginCounts,
+                    label: 'Outbound Traffic',
+                    data: outboundTrafficCounts,
                     backgroundColor: '#ff6384',
                 }]
             },
@@ -158,38 +182,20 @@
             }
         });
 
-        // Line Chart: Top 5 Traffic IPs
-        const trafficIps = @json($topTrafficIps);
-        const trafficIpLabels = trafficIps.map(item => item.ip_src);
-        const trafficIpCounts = trafficIps.map(item => item.count);
 
-        new Chart(document.getElementById('trafficIpChart'), {
-            type: 'line',
-            data: {
-                labels: trafficIpLabels,
-                datasets: [{
-                    label: 'Traffic',
-                    data: trafficIpCounts,
-                    borderColor: '#36a2eb',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderWidth: 2
-                }]
-            }
-        });
+        // Top 5 Outbound Countries Chart
+        const outboundCountries = @json($topOutboundCountries);
+        const countryLabels = outboundCountries.map(item => item.country_src);
+        const countryCounts = outboundCountries.map(item => item.outbound_count);
 
-        // Bar Chart: Antivirus Alerts
-        const antivirusAlerts = @json($topAntivirusAlerts);
-        const antivirusHostLabels = antivirusAlerts.map(item => item.host_dst);
-        const antivirusCounts = antivirusAlerts.map(item => item.count);
-
-        new Chart(document.getElementById('antivirusAlertChart'), {
+        new Chart(document.getElementById('outboundCountriesChart'), {
             type: 'bar',
             data: {
-                labels: antivirusHostLabels,
+                labels: countryLabels,
                 datasets: [{
-                    label: 'Alerts',
-                    data: antivirusCounts,
-                    backgroundColor: '#ffcd56',
+                    label: 'Outbound Traffic by Country',
+                    data: countryCounts,
+                    backgroundColor: '#36a2eb',
                 }]
             },
             options: {
@@ -198,11 +204,6 @@
                 }
             }
         });
-    </script>
-</body>
-</html>
 
-                </div>
-            </div>
-        </div>
-    </x-app-layout>
+    </script>
+</x-app-layout>

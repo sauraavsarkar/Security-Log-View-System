@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AntivirusController;
+use App\Http\Controllers\FirewallController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,7 @@ Route::get('/antivirus', [AntivirusController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('antivirus');
 
-Route::get('/firewall', [AntivirusController::class, 'index'])
+Route::get('/firewall', [FirewallController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('firewall');
 

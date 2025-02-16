@@ -68,6 +68,9 @@ class ImportCsvFiles extends Command
                         }
                     }
 
+                      // Add timestamps
+                      $rowData['created_at'] = now();
+                      $rowData['updated_at'] = now();
                     // Insert data into the table
                     DB::table($tableName)->insert($rowData);
                 }
