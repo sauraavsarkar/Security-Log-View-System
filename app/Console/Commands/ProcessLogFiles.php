@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\Antivirus;
 use App\Models\LogEntry;
 use Illuminate\Support\Facades\File;
 
@@ -35,7 +36,7 @@ class ProcessLogFiles extends Command
                 foreach ($csvData as $row) {
                     if (count($row) < 3) continue; // Ensure at least 3 columns exist
 
-                    LogEntry::create([
+                    Antivirus::create([
                         'log_type'  => $logType,
                         'timestamp' => $row[0],
                         'severity'  => $row[1],

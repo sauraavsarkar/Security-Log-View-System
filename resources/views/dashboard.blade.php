@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Dashboard</title>
+    <title>Log Management Dashboard</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
                 <div class="logo-icon">
                     <i class="fas fa-cube"></i>
                 </div>
-                <span>Quantum</span>
+                <span>LOG MANAGEMENT</span>
             </div>
             <ul class="nav-links">
                 <li class="active" data-section="dashboard" data-content="dashboard-content">
@@ -35,7 +35,7 @@
                 </li>
                 <li data-section="projects" data-content="projects-content">
                     <i class="fas fa-project-diagram"></i>
-                    <span>Projects</span>
+                    <span>Types of Logs</span>
                     <div class="nav-indicator"></div>
                 </li>
                 <li data-section="messages" data-content="messages-content">
@@ -100,7 +100,10 @@
                     <div class="profile">
                         <div class="profile-trigger">
                             <div class="profile-avatar">
-                                <span class="avatar-text">SS</span>
+                            <span class="avatar-text">
+                            <i class="fa fa-user" aria-hidden="true" style="color: white; font-size: 24px;"></i>
+                            </span>
+
                             </div>
                             <div class="profile-info">
                                 <span class="profile-name">{{ Auth::user()->name }}</span>
@@ -111,7 +114,9 @@
                         <div class="profile-dropdown">
                             <div class="dropdown-header">
                                 <div class="header-avatar">
-                                    <span class="avatar-text">JD</span>
+                                    <span class="avatar-text">
+                                    <i class="fa fa-user" aria-hidden="true" style="color: white; font-size: 24px;"></i>
+                                    </span>
                                 </div>
                                 <div class="header-info">
                                     <h4>{{ Auth::user()->name }}</h4>
@@ -181,33 +186,32 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="stat-details">
-                                <h3>Revenue</h3>
+                                <h3>Antivirus</h3>
                                 <p class="counter" data-target="84591">0</p>
                                 <span class="trend positive">+8.2%</span>
                             </div>
                         </div>
                         <div class="stat-card glow">
                             <div class="stat-icon">
-                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fa fa-cogs"></i>
                             </div>
                             <div class="stat-details">
-                                <h3>Sales</h3>
+                                <h3>Firewall</h3>
                                 <p class="counter" data-target="24895">0</p>
                                 <span class="trend negative">-2.4%</span>
                             </div>
                         </div>
                         <div class="stat-card glow">
                             <div class="stat-icon">
-                                <i class="fas fa-ticket-alt"></i>
+                                <i class="fa fa-lock"></i>
                             </div>
                             <div class="stat-details">
-                                <h3>Tickets</h3>
+                                <h3>Total Block</h3>
                                 <p class="counter" data-target="1287">0</p>
                                 <span class="trend positive">+5.7%</span>
                             </div>
                         </div>
                     </div>
-
                     <div class="charts-container">
                         <div class="chart-card glow">
                             <div class="revenue-header">
@@ -255,8 +259,7 @@
 
             <div id="analytics-content" class="content-section">
                 <div class="section-header">
-                    <h2>Analytics Overview</h2>
-                    <p>Track your business performance and growth</p>
+                <h2 style="color: #4361ee; font-size: 32px; text-align: center;">Analytics Overview</h2>
                 </div>
                 <div class="analytics-grid">
                     <div class="analytics-card">
@@ -275,9 +278,9 @@
                             </div>
                         </div>
                         <div class="metric-card">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fa fa-cogs"></i>
                             <div class="metric-info">
-                                <h3>Sales</h3>
+                                <h3>Firewall</h3>
                                 <span class="counter" data-target="8745">0</span>
                                 <p class="trend positive">+8.2% <span>vs last month</span></p>
                             </div>
@@ -285,7 +288,7 @@
                         <div class="metric-card">
                             <i class="fas fa-chart-line"></i>
                             <div class="metric-info">
-                                <h3>Revenue</h3>
+                                <h3>Antivirus</h3>
                                 <span class="counter" data-target="452680">$0</span>
                                 <p class="trend positive">+15.8% <span>vs last month</span></p>
                             </div>
@@ -296,16 +299,16 @@
 
             <div id="projects-content" class="content-section">
                 <div class="section-header">
-                    <h2>Project Management</h2>
-                    <p>Track and manage your ongoing projects</p>
+                    <h2 style="color: #4361ee; font-size: 32px; text-align: center;">Types of Logs</h2>
+
                 </div>
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-header">
-                            <h3>Website Redesign</h3>
-                            <span class="status in-progress">In Progress</span>
+                            <h3>Antivirus</h3>
+                            <span class="status in-progress">Normal</span>
                         </div>
-                        <p>Modernizing the company website with new features and improved UI/UX</p>
+                        <p>Blocked due to category Advertisements & Pop-Ups</p>
                         <div class="project-meta">
                             <div class="team-members">
                                 <img src="https://ui-avatars.com/api/?name=John+Doe&background=6d5acd&color=fff" alt="Team Member">
@@ -322,10 +325,10 @@
                     </div>
                     <div class="project-card">
                         <div class="project-header">
-                            <h3>Mobile App Development</h3>
-                            <span class="status pending">Pending</span>
+                            <h3>Firewall</h3>
+                            <span class="status pending">Dangerous</span>
                         </div>
-                        <p>Creating a new mobile application for customer engagement</p>
+                        <p>Controlled application detected: Anydesk (Remote management tool)</p>
                         <div class="project-meta">
                             <div class="team-members">
                                 <img src="https://ui-avatars.com/api/?name=Sarah+Wilson&background=ffa502&color=fff" alt="Team Member">
@@ -344,29 +347,30 @@
 
             <div id="messages-content" class="content-section">
                 <div class="section-header">
-                    <h2>Messages</h2>
+                    <h2 style="color: #4361ee; font-size: 32px; text-align: center;">Messages</h2>
+
                     <p>Your communications hub</p>
                 </div>
                 <div class="messages-container">
                     <div class="message-list">
                         <div class="message-item unread">
-                            <img src="https://ui-avatars.com/api/?name=Sarah+Wilson&background=ffa502&color=fff" alt="Sarah Wilson">
+                            <img src="https://i.pinimg.com/736x/55/f4/3d/55f43de2412ad3f18fe90fac70c6472a.jpg" alt="Sarah Wilson">
                             <div class="message-content">
                                 <div class="message-header">
-                                    <h4>Sarah Wilson</h4>
+                                    <h4>Abcd Ef Ghi</h4>
                                     <span>2 hours ago</span>
                                 </div>
-                                <p>Hey, I've completed the initial designs for the new project. Would love your feedback!</p>
+                                <p>Hey,You Blocked due to category Advertisements & Pop-Ups.</p>
                             </div>
                         </div>
                         <div class="message-item">
-                            <img src="https://ui-avatars.com/api/?name=Mike+Johnson&background=2ed573&color=fff" alt="Mike Johnson">
+                            <img src="https://t4.ftcdn.net/jpg/09/37/38/41/360_F_937384196_iRHCkO9J81FruMLD0wlpw6hSeF1UOboG.jpg" alt="Mike Johnson">
                             <div class="message-content">
                                 <div class="message-header">
-                                    <h4>Mike Johnson</h4>
+                                    <h4>Dsa Qrew</h4>
                                     <span>5 hours ago</span>
                                 </div>
-                                <p>The latest deployment was successful. All systems are running smoothly.</p>
+                                <p>Hey,Your Controlled application detected: Anydesk (Remote management tool)</p>
                             </div>
                         </div>
                     </div>
@@ -375,7 +379,8 @@
 
             <div id="settings-content" class="content-section">
                 <div class="section-header">
-                    <h2>Settings</h2>
+                    <h2 style="color: #4361ee; font-size: 32px; text-align: center;">Settings</h2>
+
                     <p>Customize your dashboard experience</p>
                 </div>
                 <div class="settings-grid">

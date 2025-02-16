@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('antivirus')" :active="request()->routeIs('antivirus')">
                         {{ __('Antivirus') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('firewall')" :active="request()->routeIs('firewall')">
+                        {{ __('Firewall') }}
+                    </x-nav-link>
                 </div>
             </div>
 

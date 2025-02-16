@@ -17,6 +17,10 @@ Route::get('/antivirus', [AntivirusController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('antivirus');
 
+Route::get('/firewall', [AntivirusController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('firewall');
+
 Route::get('/failedlogins', [AntivirusController::class, 'FailedLogins'])
     ->middleware(['auth', 'verified'])
     ->name('failedlogins');

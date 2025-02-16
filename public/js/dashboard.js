@@ -208,7 +208,7 @@ class NavigationSystem {
 class ChartManager {
     static revenueChartOptions = {
         series: [{
-            name: 'Revenue',
+            name: 'Log',
             data: [31000, 40000, 28000, 51000, 42000, 109000, 100000]
         }],
         chart: {
@@ -246,7 +246,7 @@ class ChartManager {
         yaxis: {
             labels: {
                 style: { colors: '#a0a3bd' },
-                formatter: (value) => `$${value.toLocaleString()}`
+                // formatter: (value) => `${value.toLocaleString()}`
             }
         },
         tooltip: { theme: 'dark' }
@@ -296,7 +296,7 @@ class ChartManager {
 
     static salesTrendOptions = {
         series: [{
-            name: 'Sales',
+            name: 'Log',
             data: [4800, 5200, 4900, 6500, 7200, 6800, 7400]
         }],
         chart: {
@@ -323,7 +323,7 @@ class ChartManager {
         yaxis: {
             labels: {
                 style: { colors: '#a0a3bd' },
-                formatter: (value) => `$${value}`
+                // formatter: (value) => `$${value}`
             }
         },
         tooltip: { theme: 'dark' }
@@ -337,7 +337,7 @@ class ChartManager {
             background: 'transparent'
         },
         colors: ['#4361ee', '#6d5acd'],
-        labels: ['Converted', 'Not Converted'],
+        labels: ['Antivirus', 'Firewall'],
         plotOptions: {
             pie: {
                 donut: {
@@ -385,21 +385,21 @@ class ActivityManager {
     static activities = [
         {
             user: 'John Doe',
-            action: 'Created a new project',
+            action: 'Blocked due to category Advertisements & Pop-Ups',
             time: '2 minutes ago',
-            icon: 'folder-plus',
-            color: '#4361ee'
+            icon: 'exclamation-circle',
+            color: '#ff0000'
         },
         {
             user: 'Sarah Smith',
-            action: 'Uploaded new files',
+            action: 'Controlled application detected: Anydesk (Remote management tool)',
             time: '5 minutes ago',
-            icon: 'upload',
+            icon: 'history',
             color: '#6d5acd'
         },
         {
             user: 'Mike Johnson',
-            action: 'Completed task: Dashboard UI',
+            action: 'Blocked due to category Advertisements & Pop-Ups',
             time: '10 minutes ago',
             icon: 'check-circle',
             color: '#2ed573'

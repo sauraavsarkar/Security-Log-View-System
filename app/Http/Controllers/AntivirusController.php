@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use App\Models\LogEntry;
+use App\Models\Antivirus;
 
 class AntivirusController extends Controller
 {
@@ -14,79 +14,73 @@ class AntivirusController extends Controller
         $afterOfficeUsers = $this->getUsersLoggedInAfterOffice();
         $topAntivirusAlerts = $this->getTopAntivirusAlerts();
         $topTrafficIps = $this->getTopTrafficIps();
+        
 
         return view('dashboard.antivirus', compact(
-            'topFailedLogins', 'logTypeCount', 'afterOfficeUsers', 
-            'topAntivirusAlerts', 'topTrafficIps'
+            'topFailedLogins', 'afterOfficeUsers', 'topAntivirusAlerts', 'topTrafficIps' ,'logTypeCount'
         ));
 
-        // dd(compact(
-        //     'topFailedLogins', 'logTypeCount', 'afterOfficeUsers', 
-        //     'topAntivirusAlerts', 'topTrafficIps'
+        //   dd(compact(
+        //     'topFailedLogins', 'afterOfficeUsers', 
+        //     'topAntivirusAlerts', 'topTrafficIps','logTypeCount'
         // ));
-
-
     }
 
-
-    public function FailedLogins()
+    public function failedLogins()
     {
         $topFailedLogins = $this->getTopFailedLogins();
-        $logTypeCount = $this->getLogTypeCount();
         $afterOfficeUsers = $this->getUsersLoggedInAfterOffice();
         $topAntivirusAlerts = $this->getTopAntivirusAlerts();
         $topTrafficIps = $this->getTopTrafficIps();
 
         return view('dashboard.antivirus.failedlogins', compact(
-            'topFailedLogins', 'logTypeCount', 'afterOfficeUsers', 
-            'topAntivirusAlerts', 'topTrafficIps'
+            'topFailedLogins', 'afterOfficeUsers', 'topAntivirusAlerts', 'topTrafficIps'
         ));
-
-        // dd(compact(
-        //     'topFailedLogins', 'logTypeCount', 'afterOfficeUsers', 
-        //     'topAntivirusAlerts', 'topTrafficIps'
-        // ));
-
-
     }
 
+    /**
+     * Get top 5 users with failed login attempts.
+     */
     public function getTopFailedLogins()
     {
-        return LogEntry::select('username', 'event_type', DB::raw('COUNT(*) as count'))
-            ->groupBy('username', 'event_type')
-            ->orderByDesc('count')
-            ->limit(5)
-            ->get();
+        return Antivirus::select('*', DB::raw('COUNT(*) OVER(PARTITION BY `event_type`) AS count'))
+        ->orderByDesc(DB::raw('count'))
+        ->get();
     }
     
 
     public function getLogTypeCount()
     {
-        return LogEntry::select('log_type', DB::raw('count(*) as count'))
-            ->groupBy('log_type')
-            ->get();
+        return Antivirus::select('*', DB::raw('COUNT(*) OVER(PARTITION BY `event_type`) AS count'))
+        ->orderByDesc(DB::raw('count'))
+        ->get();
     }
 
     public function getUsersLoggedInAfterOffice()
     {
-        return LogEntry::whereTime('time', '<', '18:00:00')
-            ->select('username', 'time')
-            ->get();
+        return Antivirus::select('host_dst', 'username', DB::raw('COUNT(*) as username_count'))
+        ->groupBy('host_dst', 'username')
+        ->get();
     }
 
+    /**
+     * Get top 5 devices with most antivirus alerts.
+     */
     public function getTopAntivirusAlerts()
     {
-        return LogEntry::where('log_type', 'Antivirus')
-            ->select('host_dst', DB::raw('count(*) as count'))
+        return Antivirus::select('host_dst', DB::raw('COUNT(*) as count'))
             ->groupBy('host_dst')
             ->orderByDesc('count')
             ->limit(5)
             ->get();
     }
 
+    /**
+     * Get top 5 IPs with the most traffic.
+     */
     public function getTopTrafficIps()
     {
-        return LogEntry::select('ip_src', DB::raw('count(*) as count'))
+        return Antivirus::select('ip_src', DB::raw('COUNT(*) as count'))
             ->groupBy('ip_src')
             ->orderByDesc('count')
             ->limit(5)
