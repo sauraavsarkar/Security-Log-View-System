@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="py-12">
             <html lang="en" class="light-theme">
 <head>
